@@ -42,23 +42,31 @@ export async function submitOrder({ name, phone, city, address, color, quantity 
 }
 
 export async function fetchSiteContent() {
-  const { data, error } = await supabase
-    .from('site_content')
-    .select('*')
-    .eq('id', 'main')
-    .maybeSingle()
+  try {
+    const { data, error } = await supabase
+      .from('site_content')
+      .select('*')
+      .eq('id', 'main')
+      .maybeSingle()
 
-  if (error) throw error
-  return data
+    if (error) return null
+    return data
+  } catch {
+    return null
+  }
 }
 
 export async function fetchActiveProducts() {
-  const { data, error } = await supabase
-    .from('products')
-    .select('*')
-    .eq('active', true)
-    .order('created_at', { ascending: true })
+  try {
+    const { data, error } = await supabase
+      .from('products')
+      .select('*')
+      .eq('active', true)
+      .order('created_at', { ascending: true })
 
-  if (error) throw error
-  return data || []
+    if (error) return []
+    return data || []
+  } catch {
+    return []
+  }
 }
