@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { MapContainer, TileLayer, CircleMarker, useMap } from 'react-leaflet'
-import { mapLocations } from '../data/product'
+import { useSite } from '../context/SiteContext'
 import 'leaflet/dist/leaflet.css'
 
 function MapResizeFix() {
@@ -18,10 +18,16 @@ function MapResizeFix() {
 }
 
 function WorldMapSection() {
+  const { siteContent } = useSite()
+  const content = siteContent || {}
+  const locations = content.locations?.length > 0 ? content.locations : []
+
+  if (!locations.length) return null
+
   return (
     <section className="section map-section">
       <div className="container">
-        <h2 className="section-title centered">Avis clients dans le monde</h2>
+        <h2 className="section-title centered">{content.reviews_map_title || 'Avis clients dans le monde'}</h2>
 
         <div className="map-wrapper">
           <MapContainer
@@ -34,7 +40,7 @@ function WorldMapSection() {
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            {mapLocations.map((loc, i) => (
+            {locations.map((loc, i) => (
               <CircleMarker
                 key={i}
                 center={[loc.lat, loc.lng]}

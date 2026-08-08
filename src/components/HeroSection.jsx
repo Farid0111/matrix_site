@@ -2,7 +2,6 @@ import { useState } from 'react'
 import ProductGallery from './ProductGallery'
 import OrderForm from './OrderForm'
 import { useSite } from '../context/SiteContext'
-import { heroFeatures } from '../data/product'
 
 function HeroSection() {
   const { siteContent, activeProduct, loading } = useSite()
@@ -12,12 +11,8 @@ function HeroSection() {
   const product = activeProduct || {}
 
   const productFeatures = product.features?.length > 0
-    ? product.features.map((f) => f.text).filter(Boolean)
-    : heroFeatures
-
-  const price = product.price || 24990
-  const stock = product.stock ?? 12
-  const priceLabel = content.price_label || '24 990 FCFA'
+    ? product.features.map((f) => f.text || f).filter(Boolean)
+    : []
 
   if (loading) {
     return (
@@ -36,6 +31,8 @@ function HeroSection() {
     )
   }
 
+  if (!product.name && !content.product_title) return null
+
   return (
     <section className="hero section">
       <div className="container hero-grid">
@@ -47,22 +44,24 @@ function HeroSection() {
           )}
 
           <h1 className="hero-title">
-            {content.product_icon}{content.product_title || product.name || 'NeckCool Pro 2026'}
+            {content.product_icon}{content.product_title || product.name}
           </h1>
 
           <p className="hero-description">
-            {content.product_description || product.description || 'Dites adieu à la chaleur étouffante avec le ventilateur de cou portable 2026. Conçu pour un confort optimal, il offre une brise rafraîchissante sans effort, idéal pour les activités en extérieur ou au bureau. Sa technologie sans lame assure sécurité et silence.'}
+            {content.product_description || product.description}
           </p>
 
-          <div className="rating-row">
-            <div className="stars">
-              {[1, 2, 3, 4].map((i) => (
-                <span key={i} className="star filled">★</span>
-              ))}
-              <span className="star half">★</span>
+          {product.rating > 0 && (
+            <div className="rating-row">
+              <div className="stars">
+                {[1, 2, 3, 4].map((i) => (
+                  <span key={i} className="star filled">★</span>
+                ))}
+                <span className="star half">★</span>
+              </div>
+              <span className="rating-text">{product.rating.toFixed(1)} / 5</span>
             </div>
-            <span className="rating-text">{(product.rating || 4.4).toFixed(1)} / 5</span>
-          </div>
+          )}
 
           {content.stock_warning && content.stock_count > 0 && (
             <p className="stock-alert">
@@ -72,17 +71,19 @@ function HeroSection() {
           )}
 
           <div className="hero-meta">
-            <p className="price">{priceLabel}</p>
+            <p className="price">{content.price_label}</p>
           </div>
 
-          <div className="features-grid">
-            {productFeatures.map((feature, index) => (
-              <div key={feature || index} className="feature-box">
-                <span className="check-icon">✓</span>
-                <span>{feature}</span>
-              </div>
-            ))}
-          </div>
+          {productFeatures.length > 0 && (
+            <div className="features-grid">
+              {productFeatures.map((feature, index) => (
+                <div key={feature || index} className="feature-box">
+                  <span className="check-icon">✓</span>
+                  <span>{feature}</span>
+                </div>
+              ))}
+            </div>
+          )}
 
           <div className="selector-group">
             <label className="selector-label">Quantité</label>

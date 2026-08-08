@@ -1,4 +1,3 @@
-import { sectionImages } from '../data/product'
 import { useSite } from '../context/SiteContext'
 import { trackFacebookEvent } from '../lib/facebookPixel'
 
@@ -19,12 +18,14 @@ function DeliverySection() {
     .map((text) => text.trim())
     .filter(Boolean)
 
+  if (!content.delivery_title && !paragraphs.length) return null
+
   return (
     <section className="section delivery-section">
       <div className="container two-col two-col--image-left">
         <div className="col-image delivery-image-wrap">
           <img
-            src={content.delivery_image || sectionImages.deliveryColors}
+            src={content.delivery_image || '/images/products/delivery-colors.png'}
             alt="NeckCool Pro toutes les couleurs"
             className="rounded-image"
           />

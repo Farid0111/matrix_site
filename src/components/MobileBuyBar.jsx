@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { useSite } from '../context/SiteContext'
-import { trackFacebookEvent } from '../lib/facebookPixel'
 
 function MobileBuyBar() {
   const { activeProduct, siteContent } = useSite()
@@ -8,8 +7,8 @@ function MobileBuyBar() {
 
   const product = activeProduct || {}
   const content = siteContent || {}
-  const priceLabel = content.price_label || '24 990 FCFA'
-  const productName = content.product_title || product.name || 'NeckCool Pro 2026'
+  const priceLabel = content.price_label || ''
+  const productName = content.product_title || product.name || ''
 
   useEffect(() => {
     const form = document.querySelector('.order-form-card')
@@ -25,23 +24,17 @@ function MobileBuyBar() {
   }, [])
 
   const scrollToOrder = () => {
-    trackFacebookEvent('InitiateCheckout', {
-      content_name: productName,
-      content_category: 'ventilateur',
-      value: product.price || 24990,
-      currency: 'XOF',
-    })
     document.querySelector('.order-form-card')?.scrollIntoView({ behavior: 'smooth' })
   }
 
-  if (!visible) return null
+  if (!visible || !productName) return null
 
   return (
     <div className="mobile-buy-bar">
       <div className="mobile-buy-bar-inner">
         <div className="mobile-buy-bar-info">
           <span className="mobile-buy-bar-label">{productName}</span>
-          <span className="mobile-buy-bar-price">{priceLabel}</span>
+          {priceLabel && <span className="mobile-buy-bar-price">{priceLabel}</span>}
         </div>
         <button type="button" className="mobile-buy-bar-btn" onClick={scrollToOrder}>
           {content.order_button_text || 'Acheter maintenant'}

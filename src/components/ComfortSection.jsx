@@ -1,18 +1,14 @@
-import { sectionImages } from '../data/product'
 import { useSite } from '../context/SiteContext'
-import { trackFacebookEvent } from '../lib/facebookPixel'
 
 function ComfortSection() {
   const { siteContent } = useSite()
   const content = siteContent || {}
 
   const scrollToOrder = () => {
-    trackFacebookEvent('Lead', {
-      content_name: content.product_title || 'NeckCool Pro 2026',
-      content_category: 'ventilateur',
-    })
     document.querySelector('.order-form-card')?.scrollIntoView({ behavior: 'smooth' })
   }
+
+  if (!content.hero_title && !content.hero_text) return null
 
   return (
     <section className="section comfort-section">
@@ -31,7 +27,7 @@ function ComfortSection() {
 
         <div className="col-image comfort-image-wrap">
           <img
-            src={content.hero_image || sectionImages.comfortDuo}
+            src={content.hero_image || '/images/products/comfort-duo.png'}
             alt="NeckCool Pro blanc et rose"
             className="rounded-image"
           />

@@ -51,7 +51,7 @@ function OrderForm({ quantity, color = '' }) {
       trackFacebookEvent('Purchase', {
         content_name: content.product_title || 'NeckCool Pro 2026',
         content_category: 'ventilateur',
-        value: quantity * (content.price_label || '24990'),
+        value: quantity * (parseInt(content.price_label) || 24990),
         currency: 'XOF',
       })
 
