@@ -20,7 +20,16 @@ export function SiteProvider({ children }) {
         ])
 
         if (!cancelled) {
-          if (content) setSiteContent(content)
+          if (content) {
+            setSiteContent(content)
+            const root = document.documentElement
+            if (content.button_color) {
+              root.style.setProperty('--button-color', content.button_color)
+            }
+            if (content.primary_color) {
+              root.style.setProperty('--primary-color', content.primary_color)
+            }
+          }
           if (prods.length > 0) setProducts(prods)
         }
       } catch (err) {
