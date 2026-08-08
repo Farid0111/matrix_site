@@ -47,12 +47,11 @@ function HeroSection() {
           )}
 
           <h1 className="hero-title">
-            {content.product_icon}
-            {content.product_title || product.name || 'NeckCool Pro 2026'}
+            {content.product_icon}{content.product_title || product.name || 'NeckCool Pro 2026'}
           </h1>
 
           <p className="hero-description">
-            {content.product_description || content.hero_text || product.description || 'Dites adieu à la chaleur étouffante avec le ventilateur de cou portable 2026. Conçu pour un confort optimal, il offre une brise rafraîchissante sans effort, idéal pour les activités en extérieur ou au bureau. Sa technologie sans lame assure sécurité et silence.'}
+            {content.product_description || product.description || 'Dites adieu à la chaleur étouffante avec le ventilateur de cou portable 2026. Conçu pour un confort optimal, il offre une brise rafraîchissante sans effort, idéal pour les activités en extérieur ou au bureau. Sa technologie sans lame assure sécurité et silence.'}
           </p>
 
           <div className="rating-row">
