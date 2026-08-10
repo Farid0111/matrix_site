@@ -30,11 +30,13 @@ function StatsSection() {
 
             {testimonial && (
               <div className="testimonial-card">
-                <img
-                  src={testimonial.avatar || '/images/products/thumb-1.png'}
-                  alt="Produit"
-                  className="testimonial-avatar"
-                />
+                {testimonial.avatar && (
+                  <img
+                    src={testimonial.avatar}
+                    alt={testimonial.author || 'Avis client'}
+                    className="testimonial-avatar"
+                  />
+                )}
                 <div>
                   <p className="testimonial-text">
                     &ldquo;{testimonial.text}&rdquo;
