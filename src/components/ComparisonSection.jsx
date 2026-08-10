@@ -24,7 +24,7 @@ function ComparisonSection() {
         <div className="comparison-grid">
           <div className="comparison-image">
             <img
-              src={content.showcase_image || '/images/products/compare-pink.png'}
+              src={content.compare_image || '/images/products/compare-pink.png'}
               alt="NeckCool Pro rose"
               className="rounded-image comparison-product-img"
             />

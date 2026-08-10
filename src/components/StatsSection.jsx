@@ -47,7 +47,7 @@ function StatsSection() {
 
           <div className="col-image stats-image">
             <img
-              src={content.showcase_image || '/images/products/stats-green.png'}
+              src={content.stats_image || '/images/products/stats-green.png'}
               alt="NeckCool Pro vert"
               className="rounded-image stats-product-image"
             />
