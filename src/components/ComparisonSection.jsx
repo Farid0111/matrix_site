@@ -18,7 +18,7 @@ function ComparisonSection() {
     <section className="section comparison-section">
       <div className="container">
         <h2 className="section-title section-title--center-mobile">
-          {content.comparison_title || 'Notre Ventilateur de Cou Portable 2026 VS Autres Ventilateurs'}
+          {content.compare_title || content.comparison_title || 'Notre Ventilateur de Cou Portable 2026 VS Autres Ventilateurs'}
         </h2>
 
         <div className="comparison-grid">
