@@ -86,14 +86,15 @@
   position: relative;
   border-radius: 16px;
   overflow: hidden;
-  aspect-ratio: 1;
+  aspect-ratio: 1 / 1;
+  max-height: 520px;
   background: #e8f4fc;
 }
 
 .gallery-main-image {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .gallery-arrow {
@@ -528,7 +529,10 @@
 .rounded-image {
   border-radius: 16px;
   width: 100%;
-  object-fit: cover;
+  height: auto;
+  max-height: 520px;
+  object-fit: contain;
+  display: block;
 }
 
 /* Why section */
@@ -636,8 +640,11 @@
 }
 
 .comparison-product-img {
-  max-height: 420px;
-  object-fit: cover;
+  width: 100%;
+  height: auto;
+  max-height: 520px;
+  object-fit: contain;
+  display: block;
 }
 
 .section-title--center-mobile {
@@ -820,9 +827,11 @@
 }
 
 .stats-product-image {
-  height: 100%;
-  min-height: 400px;
-  object-fit: cover;
+  width: 100%;
+  height: auto;
+  max-height: 520px;
+  object-fit: contain;
+  display: block;
 }
 
 /* Delivery */
@@ -1221,9 +1230,11 @@
   .rounded-image,
   .comparison-product-img {
     border-radius: 14px;
-    max-height: 280px;
+    max-height: 320px;
     width: 100%;
-    object-fit: cover;
+    height: auto;
+    object-fit: contain;
+    display: block;
   }
 
   /* Comparison: cards on mobile, hide table */
@@ -1243,12 +1254,12 @@
   }
 
   .comparison-image {
-    max-width: 280px;
+    max-width: 320px;
     margin: 0 auto;
   }
 
   .comparison-product-img {
-    max-height: 240px;
+    max-height: 320px;
   }
 
   /* Stats */
@@ -1298,12 +1309,15 @@
 
   .stats-product-image {
     min-height: 0;
-    max-height: 300px;
+    max-height: 360px;
     width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
   }
 
   .stats-grid.two-col--image-right .col-image {
-    max-width: 280px;
+    max-width: 100%;
     margin: 0 auto;
     width: 100%;
   }
