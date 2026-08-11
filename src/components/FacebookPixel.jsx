@@ -1,8 +1,17 @@
+import { useEffect, useState } from 'react'
 import { useSite } from '../context/SiteContext'
 
 function FacebookPixel() {
   const { siteContent } = useSite()
-  const pixelId = siteContent?.facebook_pixel_id
+  const [pixelId, setPixelId] = useState(
+    () => import.meta.env.VITE_FACEBOOK_PIXEL_ID || ''
+  )
+
+  useEffect(() => {
+    if (siteContent?.facebook_pixel_id) {
+      setPixelId(siteContent.facebook_pixel_id)
+    }
+  }, [siteContent])
 
   if (!pixelId) {
     return null

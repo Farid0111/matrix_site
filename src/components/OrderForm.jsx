@@ -11,12 +11,14 @@ const initialForm = {
 }
 
 function OrderForm({ quantity, color = '' }) {
-  const { siteContent } = useSite()
+  const { siteContent, activeProduct } = useSite()
   const [form, setForm] = useState(initialForm)
   const [status, setStatus] = useState('idle')
   const [errorMessage, setErrorMessage] = useState('')
 
   const content = siteContent || {}
+  const product = activeProduct || {}
+  const price = product.price || 24990
 
   useEffect(() => {
     if (status !== 'success') return undefined
@@ -49,9 +51,9 @@ function OrderForm({ quantity, color = '' }) {
       })
 
       trackFacebookEvent('Purchase', {
-        content_name: content.product_title || 'NeckCool Pro 2026',
+        content_name: content.product_title || product.name || 'NeckCool Pro 2026',
         content_category: 'ventilateur',
-        value: quantity * (parseInt(content.price_label) || 24990),
+        value: price * quantity,
         currency: 'XOF',
       })
 
