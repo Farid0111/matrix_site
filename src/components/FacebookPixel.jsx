@@ -26,6 +26,7 @@ function FacebookPixel() {
       'https://connect.facebook.net/en_US/fbevents.js');
       fbq('init', '${pixelId}');
       fbq('track', 'PageView');
+      window.__fbqInitialized = true;
     `
     document.head.appendChild(script)
 
