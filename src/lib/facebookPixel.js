@@ -3,14 +3,17 @@ export function trackFacebookEvent(eventName, options = {}) {
     return
   }
 
-  const fbq = window.fbq
-
-  if (typeof fbq !== 'function') {
-    const tries = window.__fbqTries || 0
+  if (!window.__fbqInitialized) {
+    const tries = window.__fbqInitTries || 0
     if (tries < 20) {
-      window.__fbqTries = tries + 1
+      window.__fbqInitTries = tries + 1
       setTimeout(() => trackFacebookEvent(eventName, options), 100)
     }
+    return
+  }
+
+  const fbq = window.fbq
+  if (typeof fbq !== 'function') {
     return
   }
 
